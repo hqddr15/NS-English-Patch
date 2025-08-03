@@ -29,38 +29,73 @@ RequestExecutionLevel admin
 Function CheckWebAddr
     ; Initialize WebMode
     StrCpy $WebMode ""
+    Push $0 ; File counter to track if any files were found
+    StrCpy $0 "0"
     
     ; Check if index.html exists
     IfFileExists "$INSTDIR\index.html" CheckIndexHtml CheckIndex1Html
     
     CheckIndexHtml:
+        StrCpy $0 "1" ; Mark that we found at least one file
         ; Read index.html and check for nsc/ns
         Push "$INSTDIR\index.html"
         Call ScanFileForWebMode
-        Pop $0
-        StrCmp $0 "" CheckIndex1Html FoundWebMode
+        Pop $1
+        StrCmp $1 "" CheckIndex1Html FoundWebMode
     
     CheckIndex1Html:
         ; Check if index1.html exists
-        IfFileExists "$INSTDIR\index1.html" ScanIndex1Html NoFilesFound
+        IfFileExists "$INSTDIR\index1.html" ScanIndex1Html CheckIndex1sHtml
         
         ScanIndex1Html:
+            StrCpy $0 "1" ; Mark that we found at least one file
             ; Read index1.html and check for nsc/ns
             Push "$INSTDIR\index1.html"
             Call ScanFileForWebMode
-            Pop $0
-            StrCmp $0 "" NoWebModeFound FoundWebMode
+            Pop $1
+            StrCmp $1 "" CheckIndex1sHtml FoundWebMode
+    
+    CheckIndex1sHtml:
+        ; Check if index1s.html exists
+        IfFileExists "$INSTDIR\index1s.html" ScanIndex1sHtml CheckIndex2Html
+        
+        ScanIndex1sHtml:
+            StrCpy $0 "1" ; Mark that we found at least one file
+            ; Read index1s.html and check for nsc/ns
+            Push "$INSTDIR\index1s.html"
+            Call ScanFileForWebMode
+            Pop $1
+            StrCmp $1 "" CheckIndex2Html FoundWebMode
+    
+    CheckIndex2Html:
+        ; Check if index2.html exists
+        IfFileExists "$INSTDIR\index2.html" ScanIndex2Html CheckFilesResult
+        
+        ScanIndex2Html:
+            StrCpy $0 "1" ; Mark that we found at least one file
+            ; Read index2.html and check for nsc/ns
+            Push "$INSTDIR\index2.html"
+            Call ScanFileForWebMode
+            Pop $1
+            StrCmp $1 "" CheckFilesResult FoundWebMode
+    
+    CheckFilesResult:
+        ; Check if any files were found
+        StrCmp $0 "0" NoFilesFound NoWebModeFound
     
     NoFilesFound:
-        MessageBox MB_OK|MB_ICONSTOP "Error: Neither index.html nor index1.html found in the selected directory."
+        Pop $0
+        MessageBox MB_OK|MB_ICONSTOP "Error: None of the required HTML files (index.html, index1.html, index1s.html, index2.html) found in the selected directory."
         Abort
     
     NoWebModeFound:
-        MessageBox MB_OK|MB_ICONSTOP "Error: No 'nsc' or 'ns' text found in the HTML files."
+        Pop $0
+        MessageBox MB_OK|MB_ICONSTOP "Error: No 'nsc' or 'ns' text found in any of the HTML files."
         Abort
     
     FoundWebMode:
-        StrCpy $WebMode $0
+        Pop $0
+        StrCpy $WebMode $1
         ; Optional: Show success message
         ; MessageBox MB_OK "Web mode detected: $WebMode"
         
