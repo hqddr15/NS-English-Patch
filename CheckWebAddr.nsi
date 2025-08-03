@@ -90,7 +90,7 @@ Function CheckWebAddr
     
     NoWebModeFound:
         Pop $0
-        MessageBox MB_OK|MB_ICONSTOP "Error: No 'nsc' or 'ns' text found in any of the HTML files."
+        MessageBox MB_OK|MB_ICONSTOP "Error: No 'nsc.cg.net' or 'ns.cg.net' text found in any of the HTML files."
         Abort
     
     FoundWebMode:
@@ -101,7 +101,7 @@ Function CheckWebAddr
         
 FunctionEnd
 
-; Function to scan a file for nsc or ns
+; Function to scan a file for nsc.cg.net or ns.cg.net
 ; Input: File path on stack
 ; Output: WebMode value on stack ("nsc", "ns", or "")
 Function ScanFileForWebMode
@@ -121,8 +121,8 @@ Function ScanFileForWebMode
         FileRead $1 $2
         IfErrors ScanFileEnd
         
-        ; Check for "nsc" first (higher priority)
-        ${StrLoc} $R0 $2 "nsc" ">"
+        ; Check for "nsc.cg.net" first (higher priority)
+        ${StrLoc} $R0 $2 "nsc.cg.net" ">"
         StrCmp $R0 "" CheckForNs FoundNsc
         
         FoundNsc:
@@ -130,15 +130,15 @@ Function ScanFileForWebMode
             Goto ScanFileEnd
             
         CheckForNs:
-            ; Check for "ns"
-            ${StrLoc} $R0 $2 "ns" ">"
+            ; Check for "ns.cg.net"
+            ${StrLoc} $R0 $2 "ns.cg.net" ">"
             StrCmp $R0 "" ScanLoop FoundNs
             
         FoundNs:
-            ; Only set to "ns" if we haven't found "nsc" yet
+            ; Only set to "ns" if we haven't found "nsc.cg.net" yet
             StrCmp $3 "" 0 ScanLoop
             StrCpy $3 "ns"
-            Goto ScanLoop ; Continue scanning for "nsc"
+            Goto ScanLoop ; Continue scanning for "nsc.cg.net"
     
     ScanFileEnd:
         FileClose $1
