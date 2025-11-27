@@ -23,22 +23,25 @@ While manual installation is not recommended due to the inconvenieces, you can s
 
 **For Norn Saber Light Server:**
   1. The contents of the **root-nsl** folder should be placed in your **NSL game directory**.
-     - *(Note: -nsl ending in filenames have to removed, e.g. "alogin-nsl.exe" should become "alogin.exe")*
-  3. The contents of the **data-nsl** folder should be placed inside your game's **data** directory.
+  2. The file **ui-nsl.zip** from **root-nsl** folder should be extracted directly into the **main game directory**.
+  3. The file **ui.zip** from **root** folder should be extracted directly into the **main game directory**.
+  4. The contents of the **data-nsl** folder should be placed inside your game's **data** directory.
 
 **For Norn Saber Official Server:**
-  1. The contents of the **root-nso** folder should be placed in your **NSO game directory**.
-     - *(Note: -nso ending in filenames have to removed, e.g. "alogin-nso.exe" should become "alogin.exe")*
-  3. The contents of the **data-nso** folder should be placed inside your game's **data** directory.
+  1. The contents of the **root-nso** folder should be placed in your **NSL game directory**.
+  2. The file **ui-nso.zip** from **root-nso** folder should be extracted directly into the **main game directory**.
+  3. The file **ui.zip** from **root** folder should be extracted directly into the **main game directory**.
+  4. The contents of the **data-nso** folder should be placed inside your game's **data** directory.
 
 ## 📒 Files Contents
-Translation includes next translated files for Norn Saber:
+Translation includes next translated files for **Norn Saber Online**:
 
 **For Norn Saber Light Server:**
-- User graphics interface (windows, buttons), which is basically re-drawn BMP images - embedded into **NS English Pack** installer.
-- root-nsl/alogin-nsl.exe - game client executable application used to run the game.
-- root-nsl/SERVER-nsl.INI - list of available game servers and their channels (branches).
-- root-nsl/web0-nsl.DAT - used as a server list for the game update through "Main.exe".
+- root/ui.zip - contains graphics user interface (windows, buttons), which is basically re-drawn BMP images.
+- root-nsl/ui-nsl.zip - contains graphics user interface for NSL specifically.
+- root-nsl/alogin.exe - game client executable application used to run the game.
+- root-nsl/SERVER.INI - list of available game servers and their channels (branches).
+- root-nsl/web0.DAT - used as a server list for the game update through "Main.exe".
 - data-nsl/Item.Dat - data file for game items, objects and furniture.
 - data-nsl/Mark.Dat - data file for quests, journal, instances.
 - data-nsl/Npc.Dat - data file for all the NPCs.
@@ -48,10 +51,11 @@ Translation includes next translated files for Norn Saber:
 - data-nsl/Building.Dat - data file for City Simulation System objects.
 
 **For Norn Saber Official Server:**
-- User graphics interface (windows, buttons), which is basically re-drawn BMP images - embedded into **NS English Pack** installer.
-- root-nso/alogin-nsl.exe - game client executable application used to run the game.
-- root-nso/SERVER-nsl.INI - list of available game servers and their channels (branches).
-- root-nso/web0-nsl.DAT - used as a server list for the game update through "Main.exe".
+- root/ui.zip - contains graphics user interface (windows, buttons), which is basically re-drawn BMP images.
+- root-nso/ui-nso.zip - contains graphics user interface for NSO specifically.
+- root-nso/alogin.exe - game client executable application used to run the game.
+- root-nso/SERVER.INI - list of available game servers and their channels (branches).
+- root-nso/web0.DAT - used as a server list for the game update through "Main.exe".
 - data-nso/Item.Dat - data file for game items, objects and furniture.
 - data-nso/Mark.Dat - data file for quests, journal, instances.
 - data-nso/Npc.Dat - data file for all the NPCs.
